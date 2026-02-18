@@ -9,6 +9,12 @@ const Register = () => {
     const [dataValuesState, setDataValuesState] = useState(dataValues)
     const createUser = (e) => {
         e.preventDefault();
+        let dataArray = [];
+        dataArray = localStorage.getItem("users") ?
+            JSON.parse(localStorage.getItem("users")) :
+            [];
+        dataArray.push(dataValuesState);
+        localStorage.setItem("users", JSON.stringify(dataArray))
     }
     return (
         <div>
@@ -22,7 +28,14 @@ const Register = () => {
                         })
                     }}
                 />
-                <input type="password" placeholder='password' />
+                <input type="password" placeholder='password'
+                    onChange={(e) => {
+                        setDataValuesState({
+                            ...dataValuesState,
+                            password: e.target.value
+                        })
+                    }}
+                />
                 <input type="submit" value="Qeyd ol" />
             </form>
         </div>

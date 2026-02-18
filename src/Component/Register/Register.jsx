@@ -9,6 +9,10 @@ const Register = () => {
     const [dataValuesState, setDataValuesState] = useState(dataValues)
     const createUser = (e) => {
         e.preventDefault();
+        if (dataValuesState.password.trim() == "" || dataValuesState.userName.trim() == "") {
+            alert("Məlumatları daxil edin");
+            return;
+        }
         let dataArray = [];
         dataArray = localStorage.getItem("users") ?
             JSON.parse(localStorage.getItem("users")) :

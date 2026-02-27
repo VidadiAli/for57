@@ -3,17 +3,22 @@ import React, { useState } from 'react'
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("")
-    const [errorText, setErrorText] = useState("")
+    const [errorText, setErrorText] = useState({
+        message: '',
+        messageType: ''
+    })
 
     const loginAsAdmin = (e) => {
         e.preventDefault();
 
         if (username.trim() == "" || password.trim() == "") {
-            setErrorText("Bir şeylər daxil edin...");
+            setErrorText({
+                message: "Bir şeylər daxil edin...",
+                messageType: 'error'
+            });
             return;
         }
 
-        console.log(localStorage.getItem("adminData"))
         const adminData = localStorage.getItem("adminData")
             ? JSON.parse(localStorage.getItem("adminData")) :
             [];
@@ -22,11 +27,19 @@ const Login = () => {
             adminData.forEach((item) => {
                 if (item?.username == username && item?.password == password) {
                     localStorage.setItem("adminProfile", JSON.stringify(item))
-                    setErrorText("Daxil olduz!")
-                    window.location = "/admin-panel";
+                    setErrorText({
+                        message: "Daxil olduz!",
+                        messageType: 'success'
+                    });
+                    setTimeout(() => {
+                        window.location = "/admin-panel";
+                    }, 800)
                 }
                 else {
-                    setErrorText("Məlumat tapılmadı")
+                    setErrorText({
+                        message: "Məlumat tapılmadı",
+                        messageType: 'error'
+                    });
                 }
             })
         }
@@ -35,24 +48,38 @@ const Login = () => {
         }
     }
     return (
-        <div>
-            <div>
-                <form onSubmit={loginAsAdmin}>
-                    <label>
-                        <input type="text" placeholder='surname' onChange={
-                            (e) => setUsername(e.target.value)
-                        } />
+        <div className='register-box-back'>
+            <div className='register-box'>
+                <form onSubmit={loginAsAdmin} className='register-form'>
+                    <label className='register-form-label'>
+                        <input
+                            className='register-form-input'
+                            type="text"
+                            placeholder='İstifadəçi adı daxil et: ' onChange={
+                                (e) => setUsername(e.target.value)
+                            } />
                     </label>
-                    <label >
-                        <input type="password" placeholder='password' onChange={
-                            (e) => setPassword(e.target.value)
-                        } />
+                    <label className='register-form-label'>
+                        <input className='register-form-input'
+                            type="password"
+                            placeholder='Parol daxil et: ' onChange={
+                                (e) => setPassword(e.target.value)
+                            } />
                     </label>
-                    <input type="submit" value="Daxil ol" />
+                    <input
+                        className='register-form-submit'
+                        type="submit"
+                        value="Daxil olun!" />
                 </form>
                 {
-                    errorText && <p>
-                        {errorText}
+                    errorText?.message &&
+                    <p
+                        className={`
+                        ${errorText?.messageType == "success"
+                                ? 'success-message'
+                                : 'error-message'} response-message
+                    `}>
+                        {errorText?.message}
                     </p>
                 }
             </div>

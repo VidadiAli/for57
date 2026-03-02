@@ -1,0 +1,30 @@
+.admin-menu {
+    display: flex;
+    background-color: #678988;
+}
+
+.admin-menu-box {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.profile-info-box {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.profile-info {
+    padding: 10px;
+    color: white;
+}
+
+.log-out-as-admin {
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+}

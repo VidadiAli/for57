@@ -1,9 +1,10 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import './PanelArea.css'
 
 const PanelArea = () => {
     return (
-        <div>
+        <div className='panel-area'>
             <ul className='menu'>
                 <li className='menu-element'>
                     <NavLink to={'/teachers'} className="menu-link">
@@ -13,11 +14,6 @@ const PanelArea = () => {
                 <li className='menu-element'>
                     <NavLink to={'/groups'} className="menu-link">
                         Qruplar
-                    </NavLink>
-                </li>
-                <li className='menu-element'>
-                    <NavLink to={'/students'} className="menu-link">
-                        Students
                     </NavLink>
                 </li>
             </ul>

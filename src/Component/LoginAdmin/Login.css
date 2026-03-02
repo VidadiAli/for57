@@ -22,11 +22,22 @@
     gap: 15px;
 }
 
+.register-form-label {
+    position: relative;
+}
+
 .register-form-input {
     border: 1px solid rgba(0, 0, 0, .1);
     padding: 10px 20px;
     border-radius: 10px;
     width: 100%;
+}
+
+.register-icon{
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .register-form-submit {
@@ -52,12 +63,12 @@
     margin-top: 20px;
 }
 
-.error-message{
+.error-message {
     background-color: rgba(253, 176, 176, .4);
     color: rgb(179, 10, 10);
 }
 
-.success-message{
+.success-message {
     background-color: rgb(156, 244, 156);
     color: green;
 }

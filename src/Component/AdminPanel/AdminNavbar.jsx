@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import './AdminNavbar.css'
 
 const AdminNavbar = () => {
     const [myProfile, setMyProfile] = useState(null)

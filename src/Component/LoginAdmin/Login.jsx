@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { NavLink } from 'react-router-dom';
 
 const Login = () => {
     const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("")
+    const [password, setPassword] = useState("");
+    const [isPasswordShow, setISPasswordShow] = useState(false)
     const [errorText, setErrorText] = useState({
         message: '',
         messageType: ''
@@ -44,7 +47,10 @@ const Login = () => {
             })
         }
         else {
-            setErrorText("Heç bir qeydiyyat mövcud deyil")
+            setErrorText({
+                message: "Heç bir qeydiyyat mövcud deyil",
+                messageType: 'error'
+            })
         }
     }
     return (
@@ -61,15 +67,27 @@ const Login = () => {
                     </label>
                     <label className='register-form-label'>
                         <input className='register-form-input'
-                            type="password"
+                            type={isPasswordShow ? "text" : "password"}
                             placeholder='Parol daxil et: ' onChange={
                                 (e) => setPassword(e.target.value)
                             } />
+                        {
+                            isPasswordShow ?
+                                <FaEyeSlash className='register-icon'
+                                    onClick={() => setISPasswordShow(!isPasswordShow)} /> :
+                                <FaEye className='register-icon'
+                                    onClick={() => setISPasswordShow(!isPasswordShow)} />
+                        }
                     </label>
-                    <input
-                        className='register-form-submit'
-                        type="submit"
-                        value="Daxil olun!" />
+                    <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+                        <input
+                            className='register-form-submit'
+                            type="submit"
+                            value="Daxil olun!" />
+                        <NavLink to={'/admin-register'}
+                            style={{ textDecoration: 'underline' }}
+                            >Qeydiyyat</NavLink>
+                    </div>
                 </form>
                 {
                     errorText?.message &&
